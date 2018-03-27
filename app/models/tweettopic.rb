@@ -1,4 +1,4 @@
 class TweetTopic < ActiveRecord::Base
-  belongs_to :tweets
-  belongs_to :topics
+  belongs_to :tweet
+  belongs_to :topic
 end
