@@ -8,7 +8,7 @@ require 'pry'
 # response = client.adksmfkasdmfklamsdkfmaksdmfkamfdl
 class TwitterApi
   attr_reader :client
-  
+
   def initialize
     keys = YAML.load_file('application.yml')
     @client = Twitter::REST::Client.new do |config|
@@ -19,9 +19,10 @@ class TwitterApi
     end
   end
 
+
   def pull_data(term)
 
-    response = client.search("#{term}", result_type: "popular")
+    response = client.search("#{term}", count: 100)
 
     response.each do |item|
       User.create(screen_name: item.user.screen_name, name: item.user.name, followers: item.user.followers_count)
@@ -43,6 +44,7 @@ end
 
 tweet_client = TwitterApi.new
 tweet_client.pull_data("#superbowl")
+
 # ===============
 
 # #Users
