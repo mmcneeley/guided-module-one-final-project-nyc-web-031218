@@ -61,8 +61,11 @@ class TwitterApi
         end
       end
 
-        TweetTopic.all.where(tweet_id: (Tweet.find_by(text: item.text).id), topic_id: (Topic.find_by(name: current_tag).id)).exists? ? next : TweetTopic.create(tweet_id: (Tweet.find_by(text: item.text).id), topic_id: (Topic.find_by(name: current_tag).id))
-        # binding.pry
+      current_tweet_topic = TweetTopic.all.where(tweet_id: (Tweet.find_by(text: item.text).id), topic_id: (Topic.find_by(name: current_tag).id))
+
+      current_tweet_topic.exists? ? next :  TweetTopic.create(tweet_id: (Tweet.find_by(text: item.text).id), topic_id: (Topic.find_by(name: current_tag).id))
+
+        # TweetTopic.all.where(tweet_id: (Tweet.find_by(text: item.text).id), topic_id: (Topic.find_by(name: current_tag).id)).exists? ? next : TweetTopic.create(tweet_id: (Tweet.find_by(text: item.text).id), topic_id: (Topic.find_by(name: current_tag).id))
     end
   end
 
