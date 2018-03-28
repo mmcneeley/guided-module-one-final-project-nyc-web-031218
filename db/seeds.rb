@@ -27,7 +27,7 @@ class TwitterApi
 
     response.each do |item|
 
-        User.all.where(screen_name: item.user.screen_name).exists? ? next : User.create(screen_name: item.user.screen_name, name: item.user.name, followers: item.user.followers_count)
+        User.all.where(screen_name: item.user.screen_name).exists? ? next : User.create(screen_name: item.user.screen_name, name: item.user.name, followers_count: item.user.followers_count)
 
     end
 

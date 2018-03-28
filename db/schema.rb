@@ -25,12 +25,21 @@ ActiveRecord::Schema.define(version: 4) do
     t.integer "user_id"
     t.text "text"
     t.datetime "creation_time"
+    t.integer "favorite_count"
+    t.integer "retweet_count"
+    t.string "lang"
+    t.integer "tweet_code"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "screen_name"
     t.string "name"
-    t.integer "followers"
+    t.integer "followers_count"
+    t.integer "friends_count"
+    t.string "timezone"
+    t.integer "statuses_count"
+    t.string "profile_image_url"
+    t.integer "user_code"
   end
 
 end

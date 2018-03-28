@@ -1,5 +1,5 @@
 require_relative '../config/environment'
 require 'pry'
 
-run
+# run
 #Pry.start
