@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 4) do
     t.integer "favorite_count"
     t.integer "retweet_count"
     t.string "lang"
-    t.integer "tweet_code"
+    t.bigint "tweet_code"
   end
 
   create_table "users", force: :cascade do |t|
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 4) do
     t.string "timezone"
     t.integer "statuses_count"
     t.string "profile_image_url"
-    t.integer "user_code"
+    t.bigint "user_code"
   end
 
 end

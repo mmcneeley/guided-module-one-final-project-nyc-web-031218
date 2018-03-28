@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string :timezone
       t.integer :statuses_count
       t.string :profile_image_url
-      t.integer :user_code
+      t.bigint :user_code
     end
   end
 end
