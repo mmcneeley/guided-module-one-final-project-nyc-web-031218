@@ -27,12 +27,14 @@ class TwitterApi
 
     response.each do |item|
 
-        User.all.where(screen_name: item.user.screen_name).exists? ? next : User.create(screen_name: item.user.screen_name, name: item.user.name, followers_count: item.user.followers_count)
+        User.all.where(user_code: item.user.id).exists? ? next : User.create(screen_name: item.user.screen_name, name: item.user.name, followers_count: item.user.followers_count, friends_count: item.user.friends_count, timezone: item.user.time_zone, statuses_count: item.user.statuses_count, profile_image_url: item.user.profile_image_url, user_code: item.user.id)
 
     end
 
     response.each do |item|
-      Tweet.create(user_id: (User.find_by(screen_name: item.user.screen_name).id), text: item.text, creation_time: item.created_at)
+
+      Tweet.create(user_id: (User.find_by(screen_name: item.user.screen_name).id), text: item.text, creation_time: item.created_at, favorite_count: item.favorite_count, retweet_count: item.retweet_count, lang: item.lang, tweet_code: item.id)
+      
     end
 
 
