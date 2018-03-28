@@ -20,24 +20,53 @@ class TwitterApi
   end
 
 
+
   def pull_data(term)
 
     response = client.search("#{term}", count: 100)
 
     response.each do |item|
-      User.create(screen_name: item.user.screen_name, name: item.user.name, followers: item.user.followers_count)
+
+        User.all.where(screen_name: item.user.screen_name).exists? ? next : User.create(screen_name: item.user.screen_name, name: item.user.name, followers: item.user.followers_count)
+
     end
 
     response.each do |item|
       Tweet.create(user_id: (User.find_by(screen_name: item.user.screen_name).id), text: item.text, creation_time: item.created_at)
     end
 
-    superbowl = Topic.create(name: "#superbow")
 
     response.each do |item|
-      TweetTopic.create(tweet_id: (Tweet.find_by(text: item.text).id), topic_id: superbowl.id)
+
+      # if item.attrs[:entities][:hashtags].count == 0
+      #   next
+      # else
+        item.attrs[:entities][:hashtags].each do |tag|
+
+          Topic.all.where(name: tag[:text]).exists? ? next : Topic.create(name: tag[:text])
+      # end
+      end
     end
 
+    # superbowl = Topic.create(name: "#superbowl")
+
+    response.each do |item|
+      current_tag = ""
+
+      if item.attrs[:entities][:hashtags].count == 0
+        next
+      else
+        item.attrs[:entities][:hashtags].each do |tag|
+          current_tag = tag[:text]
+        end
+      end
+
+      current_tweet_topic = TweetTopic.all.where(tweet_id: (Tweet.find_by(text: item.text).id), topic_id: (Topic.find_by(name: current_tag).id))
+
+      current_tweet_topic.exists? ? next :  TweetTopic.create(tweet_id: (Tweet.find_by(text: item.text).id), topic_id: (Topic.find_by(name: current_tag).id))
+
+        # TweetTopic.all.where(tweet_id: (Tweet.find_by(text: item.text).id), topic_id: (Topic.find_by(name: current_tag).id)).exists? ? next : TweetTopic.create(tweet_id: (Tweet.find_by(text: item.text).id), topic_id: (Topic.find_by(name: current_tag).id))
+    end
   end
 
 end
