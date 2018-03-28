@@ -48,24 +48,47 @@ class TwitterApi
       end
     end
 
+    # superbowl = Topic.create(name: "#superbowl")
 
     response.each do |item|
       current_tag = ""
 
       if item.attrs[:entities][:hashtags].count == 0
-        #### Set to user search term (dups and only search terms without hashtag arrays)
         next
       else
         item.attrs[:entities][:hashtags].each do |tag|
           current_tag = tag[:text]
 
-            TweetTopic.all.where(tweet_id: (Tweet.find_by(text: item.text).id), topic_id: (Topic.find_by(name: current_tag).id)).exists? ? next : TweetTopic.create(tweet_id: (Tweet.find_by(text: item.text).id), topic_id: (Topic.find_by(name: current_tag).id))
+          TweetTopic.all.where(tweet_id: (Tweet.find_by(text: item.text).id), topic_id: (Topic.find_by(name: current_tag).id)).exists? ? next : TweetTopic.create(tweet_id: (Tweet.find_by(text: item.text).id), topic_id: (Topic.find_by(name: current_tag).id))
         end
       end
+
+      # current_tweet_topic = TweetTopic.all.where(tweet_id: (Tweet.find_by(text: item.text).id), topic_id: (Topic.find_by(name: current_tag).id))
+      #
+      # current_tweet_topic.exists? ? next :  TweetTopic.create(tweet_id: (Tweet.find_by(text: item.text).id), topic_id: (Topic.find_by(name: current_tag).id))
+
+        # TweetTopic.all.where(tweet_id: (Tweet.find_by(text: item.text).id), topic_id: (Topic.find_by(name: current_tag).id)).exists? ? next : TweetTopic.create(tweet_id: (Tweet.find_by(text: item.text).id), topic_id: (Topic.find_by(name: current_tag).id))
     end
+  end
 
 end
 
+#
+# response.each do |item|
+#   current_tag = ""
+#
+#   if item.attrs[:entities][:hashtags].count == 0
+#     #### Set to user search term (dups and only search terms without hashtag arrays)
+#     next
+#   else
+#     item.attrs[:entities][:hashtags].each do |tag|
+#       current_tag = tag[:text]
+#
+#
+#     end
+#   end
+#
+# end
 
 
 tweet_client = TwitterApi.new
