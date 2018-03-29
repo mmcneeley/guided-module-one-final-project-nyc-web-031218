@@ -14,6 +14,7 @@ class CommandLineInterface
     print "> "
     @topic = gets.strip
     puts "\n"
+    TwitterApi.run(@topic)
     topic_commands
     puts "\n"
   end
@@ -56,6 +57,21 @@ class CommandLineInterface
           puts Topic.total_users_for_topic
         when "new topic"
           new_topic
+        when "mike"
+          puts "NUMBER OF USERS"
+          puts User.all.count
+
+          puts "NUMBER OF TWEETS"
+          puts Tweet.all.count
+
+          puts "Number of TweetTopics"
+          puts TweetTopic.all.count
+
+          puts "Number of Topics"
+          puts Topic.all.count
+
+          puts TwitterApi.hashtags.uniq.inspect
+          puts TwitterApi.hashtags.uniq.count
         when "exit"
           run
         else
