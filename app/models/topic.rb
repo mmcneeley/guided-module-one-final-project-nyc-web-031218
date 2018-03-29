@@ -24,12 +24,14 @@ class Topic < ActiveRecord::Base
   end
 
   def self.total_tweets_for_topic(user_input = "")
-    tweets_count = Topic.find_by(name: "#{user_input}").tweets.count
+    tweets_count = Tweet.all.count
+    #tweets_count = Topic.find_by(name: "#{user_input}").tweets.count
     return "There are #{tweets_count} recent tweets for ##{user_input}"
   end
 
   def self.total_users_for_topic(user_input = "")
-    user_count = Topic.find_by(name: "#{user_input}").tweets.collect { |tweet| User.find_by(id: tweet.user_id) }.count
+    user_count = User.all.count
+    #user_count = Topic.find_by(name: "#{user_input}").tweets.collect { |tweet| User.find_by(id: tweet.user_id) }.count
     return "There are #{user_count} people tweeting about the topic ##{user_input}"
   end
 
