@@ -1,15 +1,4 @@
-# Tweet Topic Analysis Tool
-
-This command line application helps you find the most popular and trending tweets about a given topic.
-
-## How does it work?
-1. The programAsks the user for a topic they'd like to learn more about. The app then pulls data from Twitter's API matching the user's search. From here, the user can run a number of 
-
-
-
-
-
-
+# Module One Project 
 
 Congratulations, you're at the end of module one! You've worked crazy hard to get here and have learned a ton.
 
