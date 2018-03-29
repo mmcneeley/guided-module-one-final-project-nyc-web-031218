@@ -4,13 +4,23 @@ class CommandLineInterface
 
   def greet
     puts "\n"
-    puts "Hello, welcome to the Twitter query tool     ".upcase
-    puts "========================================="
+    puts "///////////////////////////////////////////////////////////////////////////////////////////"
+    puts "//////////////////////////////////////////////////////////////////////////////:..-/////////"
+    puts "////-``://///////////////////-``::``:////-``:///////////////////////:..-:////.   `.-///////"
+    puts "////.  -///////:////::////://:../.  .////.  .///////::://////////////.   `.:.       .//////"
+    puts "////.       `/` .//:  -//. `/.  :.     `:.     `:/.``````-//-``   `///.              `-////"
+    puts "////.  .:::::/  `//-  .//.  :`  -.  .:::/.  .:::/`  `.`   :.  .::::///:-            `::////"
+    puts "////-  `-----/`  --`  `--  `/`  --  `---:-  `---:.  `....-/`  //////////.          .///////"
+    puts "/////:.``````:/.````..````.:/-``:/:.````./:.````./-```````/-``////:-..``        `.:////////"
+    puts "/////////////////////////////////////////////////////////////////////:-......--:///////////"
+    puts "///////////////////////////////////////////////////////////////////////////////////////////"
+    puts "\n"
+    puts "Hello, welcome to the Twitter query tool".upcase
   end
 
   def new_topic
     puts "\n"
-    puts "Enter a topic to analyze Twitter's data:"
+    puts "Enter a topic (e.g. beyonce) to find and analyze tweets:"
     print "> "
     @topic = gets.strip
     puts "\n"
@@ -30,19 +40,16 @@ class CommandLineInterface
   def topic_commands
     @topic = @topic.downcase
     loop do
+      puts "Available commands on the topic: #{@topic.upcase}."
+      puts "- loved : the most favorited tweet"
+      puts "- retweeted : the most retweet"
+      puts "- celeb : the most popular person tweeting"
+      puts "- total tweets : number of tweets"
+      puts "- total users : number of users tweeting"
+      puts "- new topic : change the topic"
+      puts "- data : to see the total database counts"
+      puts "- exit : quit the program"
       puts "\n"
-      if @topic == ""
-        new_topic
-      else
-        puts "Here's a list of commands you can run on: #{@topic.upcase}."
-      end
-      puts "- loved : the most favorited tweet about #{@topic}"
-      puts "- retweeted : the most retweet about #{@topic}"
-      puts "- celeb : the most popular person tweeting about #{@topic}"
-      puts "- total tweets : number of tweets about #{@topic}"
-      puts "- total users : number of users tweeting about #{@topic}"
-      puts "- new topic : search for a new topic"
-      puts "- exit : go back to the main menu"
       print "> "
       response = gets.chomp
       case response
@@ -59,46 +66,35 @@ class CommandLineInterface
         when "new topic"
           new_topic
         when "data"
+          puts "\n"
           puts "NUMBER OF USERS"
           puts User.all.count
+
           puts "NUMBER OF TWEETS"
           puts Tweet.all.count
-          puts "Number of TweetTopics"
-          puts TweetTopic.all.count
-          puts "Number of Topics"
+
+          puts "NUMBER OF RELATED HASHTAG TOPICS"
           puts Topic.all.count
+          puts "\n"
         when "exit"
-          run
+          exit
         else
-          puts "sending you back to the main menu"
-          run
+          puts "\n"
+          puts "Not a valid command. Please try again."
+          puts "\n"
       end
     end
   end
 
   def exit
+    puts "\n"
     puts "We're sad to see you go! Exiting..."
+    puts "\n"
     abort
   end
 
   def run
-    program_commands
-    loop do
-      puts "Please enter a command:"
-      print "> "
-      response = gets.chomp
-        if response.downcase == "topic"
-          new_topic
-        elsif response.downcase == "help"
-          program_commands
-        elsif response.downcase == "exit"
-          exit
-        else
-          puts "Not a valid response. Type 'help' for a list of commands."
-          puts "\n"
-        end
-      response = ""
-    end
+    new_topic
   end
 
 end
