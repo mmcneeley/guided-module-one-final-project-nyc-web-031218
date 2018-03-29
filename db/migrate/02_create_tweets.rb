@@ -8,6 +8,7 @@ class CreateTweets < ActiveRecord::Migration[5.1]
       t.integer :retweet_count
       t.string :lang
       t.bigint :tweet_code
+      t.blob :hashtags
     end
   end
 end
