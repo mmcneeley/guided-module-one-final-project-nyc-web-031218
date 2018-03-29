@@ -50,8 +50,8 @@ class TwitterApi
           favorite_count: item.favorite_count,
           retweet_count: item.retweet_count,
           lang: item.lang,
-          tweet_code: item.id
-          hashtags: item.attrs[:entities][:hashtags].map {|tag| tag[:text].downcase}.uniq
+          tweet_code: item.id,
+          hashtags: item.attrs[:entities][:hashtags].map {|tag| tag[:text].downcase}.uniq.join(", ")
         )
       end
     end
@@ -107,8 +107,7 @@ class TwitterApi
     term = term.downcase
 
     # Call the Twitter API via Twitter Gem and store response
-    response = client.search("##{term}", count: 10)
-    binding.pry
+    response = client.search("##{term}", count: 100)
 
     # Create our first topic while we have the search term
     Topic.create(name: term)

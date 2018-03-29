@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 4) do
     t.integer "retweet_count"
     t.string "lang"
     t.bigint "tweet_code"
+    t.text "hashtags"
   end
 
   create_table "users", force: :cascade do |t|

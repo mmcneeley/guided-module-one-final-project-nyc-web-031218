@@ -28,6 +28,7 @@ class CommandLineInterface
   end
 
   def topic_commands
+    @topic = @topic.downcase
     loop do
       puts "\n"
       if @topic == ""
@@ -46,32 +47,26 @@ class CommandLineInterface
       response = gets.chomp
       case response
         when "loved"
-          puts Topic.most_favorited_by_topic
+          Topic.most_favorited_by_topic(@topic)
         when "retweeted"
-          puts Topic.most_retweeted_by_topic
+          Topic.most_retweeted_by_topic(@topic)
         when "celeb"
-          puts Topic.most_popular_user_by_topic
+          Topic.most_popular_user_by_topic(@topic)
         when "total tweets"
-          puts Topic.total_tweets_for_topic
+          Topic.total_tweets_for_topic(@topic)
         when "total users"
-          puts Topic.total_users_for_topic
+          Topic.total_users_for_topic(@topic)
         when "new topic"
           new_topic
-        when "mike"
+        when "data"
           puts "NUMBER OF USERS"
           puts User.all.count
-
           puts "NUMBER OF TWEETS"
           puts Tweet.all.count
-
           puts "Number of TweetTopics"
           puts TweetTopic.all.count
-
           puts "Number of Topics"
           puts Topic.all.count
-
-          puts TwitterApi.hashtags.uniq.inspect
-          puts TwitterApi.hashtags.uniq.count
         when "exit"
           run
         else
