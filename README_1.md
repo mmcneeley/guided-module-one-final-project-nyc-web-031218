@@ -10,7 +10,7 @@ Fork and clone this github repository down onto your local machine. In your comm
 
 Make sure to run bundle install in the command line in order to install all required gems and dependencies.
 ```
-$ bundle instal
+$ bundle install
 ```
 
 ### Installing
@@ -35,7 +35,6 @@ Once you have cloned the project down, bundle install all dependencies and have 
 ## Contributing
 
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
 
 ## Authors Mike McNeeley
 
